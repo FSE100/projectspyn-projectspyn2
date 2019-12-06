@@ -8,17 +8,20 @@ while runRobot == 1
         switch(color)
             case 5 %RED- Stop Sign
                 brick.beep();
+                disp('red');
                 brick.StopMotor('AB','Brake');
                 pause(4);
                 ignoredColor = 5;
             case 4 %YELLOW- Final Parking Space
-                brick.beep();
+                disp('yellow');
                 if passengerReturned == 1
+                    brick.beep();
                     brick.StopMotor('AB','Coast');
                     runRobot = -1;
                 end
-            case 3 %GREEN- Passenger Pickup
+            case 2 %BLUE- Passenger Pickup
                 brick.beep();
+                disp('blue');
                 passengerDetection = 60; % brick.UltrasonicDist(4);
                 if passengerDetection > 30 && passengerReturned == -1
                     %PICKUP CODE HERE
@@ -31,8 +34,9 @@ while runRobot == 1
                     disp('PassengerReturned = 0');
                 end
                 ignoredColor = 3;
-            case 2 %BLUE- Passenger Dropoff
+            case 3 %GREEN- Passenger Dropoff
                 brick.beep();
+                disp('green');
                 passengerDetection = 20; % brick.UltrasonicDist(4);
                 if passengerDetection < 30 && passengerReturned == 0
                     %DROPOFF CODE HERE
@@ -47,6 +51,7 @@ while runRobot == 1
                 ignoredColor = 4;
             otherwise
                 %MOTION CODE HERE
+                disp('move');
                 navigating = 1;
                 j = move(navigating, brick);
                 ignoredColor = -1;
